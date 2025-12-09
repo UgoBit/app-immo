@@ -9,7 +9,7 @@
 
 ## 1. VISION & CONTEXTE
 
-**Locataire seras utilisé pour désigner les locataires ou les propriétaires**
+**"Locataire" seras utilisé pour désigner les locataires ou les propriétaires**
 
 ### 1.1 Le Problème
 

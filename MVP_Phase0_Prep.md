@@ -9,6 +9,8 @@
 
 ## 1. VISION & CONTEXTE
 
+**Locataire seras utilisé pour désigner les locataires ou les propriétaires**
+
 ### 1.1 Le Problème
 
 **Situation actuelle :**
@@ -34,7 +36,7 @@ Une **plateforme centralisée** qui :
 
 | Rôle | Description | Nombre estimé |
 |------|-------------|---------------|
-| **Locataire/Propriétaire** | Signale les problèmes | Variable |
+| **Locataire** | Signale les problèmes | Variable |
 | **Artisan/Entreprise** | Effectue les travaux | 5-10 (MVP) |
 | **Promoteur/Syndic** | Gère les demandes, administre la plateforme | 1-2 (MVP) |
 | **Admin/Coordinateur** | Gestion globale (peut être Damien) | 1 |
@@ -50,7 +52,7 @@ Une **plateforme centralisée** qui :
 - [ ] Permettre à un admin/promoteur de suivre toutes les demandes en temps réel
 - [ ] Automatiser le routage des demandes vers les bons intervenants
 
-### 2.2 Objectifs Secondaires (à définir après feedback Damien)
+### 2.2 Objectifs Secondaires (à définir après feedback)
 
 - [ ] Intégration avec des prestataires existants
 - [ ] Notifications/alertes en temps réel
@@ -379,13 +381,12 @@ Voir intervention + signatures
 
 ## 9. DÉPENDANCES / QUESTIONS EN ATTENTE
 
-### À clarifier avec Damien :
+### À clarifier :
 
 - [ ] **Workflow exact** : Qui reçoit la demande en premier ? (promoteur ? syndic ? entreprise directe ?)
 - [ ] **Initialisation des logements** : Qui crée les logements dans l'app ? Comment ?
 - [ ] **Photos essentielles ?** : Important dès le départ ou nice-to-have ?
 - [ ] **Signatures légales** : Signature simple (proof) ou signature conforme (légale) ?
-- [ ] **Client testeur** : Y a déjà quelqu'un en vue pour tester après 3 mois ?
 
 ### Blockers techniques identifiés :
 
@@ -403,7 +404,7 @@ La v1 est un succès si :
 - [ ] Un admin voit toutes les demandes et leur état en temps réel
 - [ ] Le système fonctionne avec ~5 utilisateurs simultanés
 - [ ] Les données sont persistées et traçables
-- [ ] Damien est satisfait du résultat et prêt à montrer à un client
+- [ ] Tout le monde est satisfait du résultat et prêt à montrer à un client
 
 ---
 
@@ -416,4 +417,4 @@ La v1 est un succès si :
 
 ---
 
-**Version suivante :** Inclure réponses de Damien + Affiner user stories + Créer wireframes détaillés
+**Version suivante :** Affiner user stories + Créer wireframes détaillés

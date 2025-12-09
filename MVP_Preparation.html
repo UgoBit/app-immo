@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MVP_Preparation</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="document-de-préparation---projet-sav-immobilier">Document de Préparation - Projet SAV Immobilier</h1>
+<p><strong>Projet :</strong> Application de suivi des travaux de garantie en immobilier neuf<br>
+<strong>Version :</strong> 0.2 (Spécifications confirmées)<br>
+<strong>Date :</strong> Décembre 2025<br>
+<strong>Équipe :</strong> Ugo (Développeur), Damien (Domaine expert)</p>
+<hr>
+<h2 id="vision--contexte">1. VISION &amp; CONTEXTE</h2>
+<h3 id="le-problème">1.1 Le Problème</h3>
+<p><strong>Situation actuelle :</strong></p>
+<ul>
+<li>Les demandes de travaux de SAV passent par des emails entre multiples acteurs (locataires, promoteurs, MOE, entreprises)</li>
+<li>Perte de temps significative et retards de chantier</li>
+<li>Manque de traçabilité et de coordination entre les différents intervenants</li>
+<li>Processus de signature et validation dispersés</li>
+<li>Les Quitus (attestations de fin de travaux) doivent être transmis manuellement à tous les intermédiaires</li>
+</ul>
+<p><strong>Impact métier :</strong></p>
+<ul>
+<li>Délais allongés pour résoudre les problèmes</li>
+<li>Mauvaise expérience client (locataires/propriétaires frustés)</li>
+<li>Inefficacité administrative pour les promoteurs/syndics</li>
+<li>Perte de documents/signatures critiques</li>
+</ul>
+<h3 id="la-solution-proposée">1.2 La Solution Proposée</h3>
+<p>Une <strong>plateforme centralisée</strong> qui :</p>
+<ul>
+<li>Permet au promoteur de créer sa résidence et ses logements</li>
+<li>Génère automatiquement des QR codes associés à chaque logement</li>
+<li>Permet aux occupants (locataires/propriétaires) de signaler les problèmes via QR code</li>
+<li>Automatise le routage des demandes via la chaîne d’intervenants (Promoteur → MOE → Entreprise)</li>
+<li>Permet à l’entreprise de documenter l’intervention (photos avant/après) et faire signer un <strong>Quitus</strong> à l’occupant</li>
+<li>Distribue automatiquement le Quitus à tous les intermédiaires</li>
+</ul>
+<h3 id="cible-utilisateurs-mvp">1.3 Cible Utilisateurs (MVP)</h3>
+
+<table>
+<thead>
+<tr>
+<th>Rôle</th>
+<th>Description</th>
+<th>Nombre estimé</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Propriétaire/Locataire</strong></td>
+<td>Crée les demandes de SAV via QR</td>
+<td>Variable</td>
+</tr>
+<tr>
+<td><strong>Gestionnaire</strong></td>
+<td>Reçoit/valide les demandes (optionnel selon cas)</td>
+<td>Variable</td>
+</tr>
+<tr>
+<td><strong>Promoteur</strong></td>
+<td>Crée la résidence, logements, entreprises; gère les demandes</td>
+<td>1-2 (MVP)</td>
+</tr>
+<tr>
+<td><strong>Maître d’œuvre (MOE)</strong></td>
+<td>Valide et assigne l’intervention à l’entreprise</td>
+<td>1-2 (MVP)</td>
+</tr>
+<tr>
+<td><strong>Artisan/Entreprise</strong></td>
+<td>Effectue les travaux et fait signer le Quitus</td>
+<td>5-10 (MVP)</td>
+</tr>
+<tr>
+<td><strong>Admin/Coordinateur</strong></td>
+<td>Gestion globale (peut être Damien)</td>
+<td>1</td>
+</tr>
+</tbody>
+</table><hr>
+<h2 id="objectifs-du-mvp">2. OBJECTIFS DU MVP</h2>
+<h3 id="objectifs-primaires">2.1 Objectifs Primaires</h3>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled=""> Permettre au promoteur de créer une résidence avec ses logements</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled=""> Générer automatiquement des QR codes pour chaque logement</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled=""> Permettre à un occupant de créer une demande via QR code en &lt; 2 min</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled=""> Router automatiquement la demande dans la chaîne : Promoteur → MOE → Entreprise</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled=""> Permettre à l’entreprise de documenter l’intervention avec photos et faire signer le Quitus</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled=""> Distribuer automatiquement le Quitus à tous les intermédiaires</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled=""> Permettre au promoteur de suivre toutes les demandes en temps réel</li>
+</ul>
+<h3 id="objectifs-secondaires-à-affiner-après-tests">2.2 Objectifs Secondaires (à affiner après tests)</h3>
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled=""> Notifications/alertes en temps réel à chaque étape</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled=""> Historique complet de chaque demande</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled=""> Export de rapports (données de suivi, Quitus)</li>
+</ul>
+<h3 id="ce-qui-nest-pas-au-mvp">2.3 Ce qui N’EST PAS au MVP</h3>
+<ul>
+<li>Signature légale conforme (signature digitale simple pour valider)</li>
+<li>Intégration de devis/facturation</li>
+<li>Multi-langue</li>
+<li>App native iOS (web responsive suffit)</li>
+<li>Gestion des gestionnaires (cas propriétaire → gestionnaire) - peut être ajouté après</li>
+</ul>
+<hr>
+<h2 id="analyse-des-besoins">3. ANALYSE DES BESOINS</h2>
+<h3 id="user-stories---promoteur-admin">3.1 User Stories - PROMOTEUR (ADMIN)</h3>
+<pre><code>En tant que promoteur/administrateur du système,
+Je veux créer et gérer mes résidences et logements,
+Afin de les rendre disponibles pour les demandes de SAV.
+
+Critères d'acceptation :
+- Je peux créer une résidence avec ses informations
+- Je peux ajouter des logements à la résidence avec leurs adresses/numéros
+- Un QR code unique est généré automatiquement pour chaque logement
+- Je peux télécharger/imprimer les QR codes
+- Je peux ajouter les entreprises agréées avec leurs coordonnées
+- Je vois un dashboard avec toutes mes demandes de SAV
+- Je peux filtrer par statut, urgence, type de travaux
+- Je peux voir le parcours complet de chaque demande
+</code></pre>
+<h3 id="user-stories---occupant-locatairepropriétaire">3.2 User Stories - OCCUPANT (Locataire/Propriétaire)</h3>
+<pre><code>En tant que locataire ou propriétaire d'un logement neuf,
+Je veux pouvoir signaler rapidement un problème,
+Afin que le problème soit traité rapidement.
+
+Critères d'acceptation :
+- Je scanne un QR code avec mon téléphone
+- Je suis dirigé vers un formulaire pré-rempli avec mon adresse/logement
+- Je renseigne : type de problème, description, urgence, photos
+- Je reçois une confirmation de création avec un numéro de demande
+- Je peux voir l'état de ma demande
+- Je dois signer le Quitus une fois l'intervention terminée
+</code></pre>
+<h3 id="user-stories---maître-dœuvre-moe">3.3 User Stories - MAÎTRE D’ŒUVRE (MOE)</h3>
+<pre><code>En tant que maître d'œuvre,
+Je veux recevoir et valider les demandes de SAV,
+Afin de les assigner à l'entreprise compétente.
+
+Critères d'acceptation :
+- Je reçois une notification pour chaque nouvelle demande
+- Je peux voir les détails de la demande
+- Je peux assigner la demande à une entreprise
+- Je peux voir l'état d'avancement de l'intervention
+- Je reçois le Quitus une fois signé par l'occupant
+</code></pre>
+<h3 id="user-stories---artisanentreprise">3.4 User Stories - ARTISAN/ENTREPRISE</h3>
+<pre><code>En tant qu'artisan envoyé pour une intervention,
+Je veux confirmer ma présence et documenter l'intervention,
+Afin de laisser une trace de ce qui a été fait et valider l'intervention.
+
+Critères d'acceptation :
+- Je reçois une notification pour chaque intervention assignée
+- Je scanne un QR code sur place pour accéder à la demande
+- Je vois les détails de l'intervention à effectuer
+- Je peux ajouter des photos avant/après les travaux
+- Je peux faire signer un Quitus à l'occupant (signature digitale sur écran)
+- Je signe aussi le Quitus pour valider
+- Le Quitus est transmis automatiquement à tous les intermédiaires
+</code></pre>
+<hr>
+<h2 id="workflows-détaillés">4. WORKFLOWS DÉTAILLÉS</h2>
+<h3 id="workflow-complet-dune-demande">4.1 Workflow Complet d’une Demande</h3>
+<pre><code>1. CRÉATION STRUCTURE
+   Promoteur crée Résidence → Logements → QR Codes générés
+   Promoteur ajoute Entreprises agréées
+
+2. CRÉATION DE DEMANDE
+   Occupant scanne QR → Remplissage formulaire → Création demande (Statut: NOUVEAU)
+
+3. VALIDATION PROMOTEUR
+   Promoteur reçoit notif → Valide demande → Assigne au MOE (Statut: ATTRIBUE_MOE)
+
+4. VALIDATION MOE
+   MOE reçoit notif → Valide demande → Assigne à Entreprise (Statut: ATTRIBUE_ENTREPRISE)
+
+5. INTERVENTION
+   Entreprise reçoit notif → Scanne QR sur place → Ajoute photos avant
+   → Effectue travaux → Ajoute photos après (Statut: EN_COURS)
+
+6. SIGNATURE QUITUS
+   Entreprise &amp; Occupant signent le Quitus (Statut: QUITUS_SIGNE)
+
+7. DISTRIBUTION QUITUS
+   Quitus distribué automatiquement à:
+   - Promoteur ✓
+   - MOE ✓
+   - Occupant ✓
+   Statut final: TERMINE
+</code></pre>
+<h3 id="états--statuts">4.2 États / Statuts</h3>
+<pre><code>NOUVEAU → ATTRIBUE_MOE → ATTRIBUE_ENTREPRISE → EN_COURS → QUITUS_SIGNE → TERMINE
+
+Possible aussi :
+→ REJETE (si pas conforme ou autre raison)
+</code></pre>
+<h3 id="rôles--permissions">4.3 Rôles &amp; Permissions</h3>
+
+<table>
+<thead>
+<tr>
+<th>Rôle</th>
+<th>Créer demande</th>
+<th>Valider</th>
+<th>Assigner</th>
+<th>Voir tout</th>
+<th>Signer Quitus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Occupant</strong></td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗ (juste sienne)</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><strong>Promoteur</strong></td>
+<td>✗</td>
+<td>✓</td>
+<td>✓ (au MOE)</td>
+<td>✓</td>
+<td>✗</td>
+</tr>
+<tr>
+<td><strong>MOE</strong></td>
+<td>✗</td>
+<td>✓</td>
+<td>✓ (à Entreprise)</td>
+<td>✓ (filtrées)</td>
+<td>✗</td>
+</tr>
+<tr>
+<td><strong>Entreprise</strong></td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td>✗ (assignées)</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><strong>Admin</strong></td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table><hr>
+</div>
+</body>
+
+</html>

@@ -126,6 +126,8 @@ Critères d'acceptation :
 - Je vois un dashboard avec toutes mes demandes de SAV
 - Je peux filtrer par statut, urgence, type de travaux
 - Je peux voir le parcours complet de chaque demande
+- Je peux créer et/ou modifier une demande
+- Je reçois une notification pour chaque nouvelle demande
 </code></pre>
 <h3 id="user-stories---occupant-locatairepropriétaire">3.2 User Stories - OCCUPANT (Locataire/Propriétaire)</h3>
 <pre><code>En tant que locataire ou propriétaire d'un logement neuf,
@@ -133,11 +135,13 @@ Je veux pouvoir signaler rapidement un problème,
 Afin que le problème soit traité rapidement.
 
 Critères d'acceptation :
+- Doit renseigner ses coordonnées
 - Je scanne un QR code avec mon téléphone
 - Je suis dirigé vers un formulaire pré-rempli avec mon adresse/logement
 - Je renseigne : type de problème, description, urgence, photos
 - Je reçois une confirmation de création avec un numéro de demande
 - Je peux voir l'état de ma demande
+- Je peux voir l'état de l'ensemble des demandes, même déjà traitées
 - Je dois signer le Quitus une fois l'intervention terminée
 </code></pre>
 <h3 id="user-stories---maître-dœuvre-moe">3.3 User Stories - MAÎTRE D’ŒUVRE (MOE)</h3>
@@ -151,6 +155,9 @@ Critères d'acceptation :
 - Je peux assigner la demande à une entreprise
 - Je peux voir l'état d'avancement de l'intervention
 - Je reçois le Quitus une fois signé par l'occupant
+- Je vois un dashboard avec toutes mes demandes de SAV
+- Je peux filtrer par statut, urgence, type de travaux
+- Je peux voir le parcours complet de chaque demande
 </code></pre>
 <h3 id="user-stories---artisanentreprise">3.4 User Stories - ARTISAN/ENTREPRISE</h3>
 <pre><code>En tant qu'artisan envoyé pour une intervention,
@@ -221,24 +228,24 @@ Possible aussi :
 <td>✓</td>
 <td>✗</td>
 <td>✗</td>
-<td>✗ (juste sienne)</td>
+<td>✗ (juste siennes)</td>
 <td>✓</td>
 </tr>
 <tr>
 <td><strong>Promoteur</strong></td>
 <td>✗</td>
 <td>✓</td>
-<td>✓ (au MOE)</td>
 <td>✓</td>
-<td>✗</td>
+<td>✓</td>
+<td>✓</td>
 </tr>
 <tr>
 <td><strong>MOE</strong></td>
-<td>✗</td>
 <td>✓</td>
-<td>✓ (à Entreprise)</td>
-<td>✓ (filtrées)</td>
-<td>✗</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
 </tr>
 <tr>
 <td><strong>Entreprise</strong></td>
@@ -255,6 +262,101 @@ Possible aussi :
 <td>✓</td>
 <td>✓</td>
 <td>✓</td>
+</tr>
+</tbody>
+</table><hr>
+<h2 id="spécifications-techniques">5. SPÉCIFICATIONS TECHNIQUES</h2>
+<h3 id="architecture-générale">5.1 Architecture Générale</h3>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│                    Frontend Web                          │
+│        (Admin/Promoteur/MOE - Dashboard &amp; Gestion)      │
+│                  (React + TypeScript)                    │
+└──────────────────┬──────────────────────────────────────┘
+                   │
+        ┌──────────┴──────────┐
+        │                     │
+┌───────▼──────────┐  ┌──────▼──────────────┐
+│  Frontend Mobile │  │   Backend API       │
+│  (QR Scan)       │  │  (Node.js + Expr)   │
+│ (Web Responsive) │  │                     │
+└───────┬──────────┘  └──────┬──────────────┘
+        │                    │
+        └────────┬───────────┘
+                 │
+        ┌────────▼─────────┐
+        │  Base de Données │
+        │   (PostgreSQL)   │
+        └──────────────────┘
+        
+        Plus: Stockage photos (AWS S3 gratuit tier / Cloudinary)
+        Authentification: JWT + OAuth
+        Notifications: Email/SMS basiques
+</code></pre>
+<h3 id="stack-technologique">5.2 Stack Technologique</h3>
+
+<table>
+<thead>
+<tr>
+<th>Composant</th>
+<th>Technologie</th>
+<th>Justification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Backend API</strong></td>
+<td>Node.js + Express</td>
+<td>Rapide, JS partout, écosystème riche</td>
+</tr>
+<tr>
+<td><strong>Base de Données</strong></td>
+<td>PostgreSQL</td>
+<td>Robuste, gratuit, relations complexes</td>
+</tr>
+<tr>
+<td><strong>Frontend Web</strong></td>
+<td>React + TypeScript</td>
+<td>Modern, composable, bon écosystème</td>
+</tr>
+<tr>
+<td><strong>Frontend Mobile</strong></td>
+<td>Web Responsive (React)</td>
+<td>Une cible, pas d’app native</td>
+</tr>
+<tr>
+<td><strong>Authentification</strong></td>
+<td>JWT + Email/Password</td>
+<td>Simple, adapté MVP</td>
+</tr>
+<tr>
+<td><strong>Stockage fichiers</strong></td>
+<td>Cloudinary (gratuit tier)</td>
+<td>Photos, facile à intégrer</td>
+</tr>
+<tr>
+<td><strong>Hosting Backend</strong></td>
+<td>Render / Railway (gratuit)</td>
+<td>Facile, gratuit au départ</td>
+</tr>
+<tr>
+<td><strong>Hosting Frontend</strong></td>
+<td>Vercel / Netlify</td>
+<td>Gratuit, déploiement facile</td>
+</tr>
+<tr>
+<td><strong>QR Code</strong></td>
+<td>qr-code.js (npm)</td>
+<td>Standard, gratuit</td>
+</tr>
+<tr>
+<td><strong>Signature</strong></td>
+<td>canvas (HTML5)</td>
+<td>Dessiner signature, pas de dépendance payante</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td>Email basique (nodemailer)</td>
+<td>Simple pour MVP, peut ajouter SMS après</td>
 </tr>
 </tbody>
 </table><hr>

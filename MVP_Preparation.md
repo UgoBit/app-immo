@@ -93,6 +93,8 @@ Critères d'acceptation :
 - Je vois un dashboard avec toutes mes demandes de SAV
 - Je peux filtrer par statut, urgence, type de travaux
 - Je peux voir le parcours complet de chaque demande
+- Je peux créer et/ou modifier une demande
+- Je reçois une notification pour chaque nouvelle demande
 ```
 
 ### 3.2 User Stories - OCCUPANT (Locataire/Propriétaire)
@@ -103,11 +105,13 @@ Je veux pouvoir signaler rapidement un problème,
 Afin que le problème soit traité rapidement.
 
 Critères d'acceptation :
+- Doit renseigner ses coordonnées
 - Je scanne un QR code avec mon téléphone
 - Je suis dirigé vers un formulaire pré-rempli avec mon adresse/logement
 - Je renseigne : type de problème, description, urgence, photos
 - Je reçois une confirmation de création avec un numéro de demande
 - Je peux voir l'état de ma demande
+- Je peux voir l'état de l'ensemble des demandes, même déjà traitées
 - Je dois signer le Quitus une fois l'intervention terminée
 ```
 
@@ -124,6 +128,9 @@ Critères d'acceptation :
 - Je peux assigner la demande à une entreprise
 - Je peux voir l'état d'avancement de l'intervention
 - Je reçois le Quitus une fois signé par l'occupant
+- Je vois un dashboard avec toutes mes demandes de SAV
+- Je peux filtrer par statut, urgence, type de travaux
+- Je peux voir le parcours complet de chaque demande
 ```
 
 ### 3.4 User Stories - ARTISAN/ENTREPRISE
@@ -191,10 +198,59 @@ Possible aussi :
 
 | Rôle | Créer demande | Valider | Assigner | Voir tout | Signer Quitus |
 |------|---------------|---------|----------|-----------|---------------|
-| **Occupant** | ✓ | ✗ | ✗ | ✗ (juste sienne) | ✓ |
-| **Promoteur** | ✗ | ✓ | ✓ (au MOE) | ✓ | ✗ |
-| **MOE** | ✗ | ✓ | ✓ (à Entreprise) | ✓ (filtrées) | ✗ |
+| **Occupant** | ✓ | ✗ | ✗ | ✗ (juste siennes) | ✓ |
+| **Promoteur** | ✗ | ✓ | ✓ | ✓ | ✓ |
+| **MOE** | ✓ | ✓ | ✓ | ✓ | ✓ |
 | **Entreprise** | ✗ | ✗ | ✗ | ✗ (assignées) | ✓ |
 | **Admin** | ✓ | ✓ | ✓ | ✓ | ✓ |
+
+---
+
+## 5. SPÉCIFICATIONS TECHNIQUES
+
+### 5.1 Architecture Générale
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Frontend Web                          │
+│        (Admin/Promoteur/MOE - Dashboard & Gestion)      │
+│                  (React + TypeScript)                    │
+└──────────────────┬──────────────────────────────────────┘
+                   │
+        ┌──────────┴──────────┐
+        │                     │
+┌───────▼──────────┐  ┌──────▼──────────────┐
+│  Frontend Mobile │  │   Backend API       │
+│  (QR Scan)       │  │  (Node.js + Expr)   │
+│ (Web Responsive) │  │                     │
+└───────┬──────────┘  └──────┬──────────────┘
+        │                    │
+        └────────┬───────────┘
+                 │
+        ┌────────▼─────────┐
+        │  Base de Données │
+        │   (PostgreSQL)   │
+        └──────────────────┘
+        
+        Plus: Stockage photos (AWS S3 gratuit tier / Cloudinary)
+        Authentification: JWT + OAuth
+        Notifications: Email/SMS basiques
+```
+
+### 5.2 Stack Technologique
+
+| Composant | Technologie | Justification |
+|-----------|-------------|---------------|
+| **Backend API** | Node.js + Express | Rapide, JS partout, écosystème riche |
+| **Base de Données** | PostgreSQL | Robuste, gratuit, relations complexes |
+| **Frontend Web** | React + TypeScript | Modern, composable, bon écosystème |
+| **Frontend Mobile** | Web Responsive (React) | Une cible, pas d'app native |
+| **Authentification** | JWT + Email/Password | Simple, adapté MVP |
+| **Stockage fichiers** | Cloudinary (gratuit tier) | Photos, facile à intégrer |
+| **Hosting Backend** | Render / Railway (gratuit) | Facile, gratuit au départ |
+| **Hosting Frontend** | Vercel / Netlify | Gratuit, déploiement facile |
+| **QR Code** | qr-code.js (npm) | Standard, gratuit |
+| **Signature** | canvas (HTML5) | Dessiner signature, pas de dépendance payante |
+| **Notifications** | Email basique (nodemailer) | Simple pour MVP, peut ajouter SMS après |
 
 ---
